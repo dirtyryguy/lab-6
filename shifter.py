@@ -26,6 +26,13 @@ class Shifter:
         time.sleep(0)
         gpio.output(pin, 0)
 
+    def latch(self):
+        """
+
+        """
+        
+        self.ping(self.latchPin)
+
     def shiftByte(self, byteVal, anode=True):
         """
 
@@ -33,8 +40,7 @@ class Shifter:
 
         for i in range(8):
             if anode:
-                gpio.output(self.dataPin, ~(byteVal & (1<<i)))
+                gpio.output(self.dataPin, not (byteVal & (1<<i)))
             else:
                 gpio.output(self.dataPin, byteVal & (1<<i))
-            self.pin(self.clockPin)
-        self.ping(self.latchPin)
+            self.ping(self.clockPin)

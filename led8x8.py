@@ -27,5 +27,6 @@ class LED8x8:
         while 1:
             for row, val in enumerate(pattern):
                 self.shift.shiftByte(val)
-                self.shift.shiftByte(1 << row)
+                self.shift.shiftByte(0b10000000 >> row, anode=False)
+                self.shift.latch()
             time.sleep(0.001)
